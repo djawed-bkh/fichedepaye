@@ -7,9 +7,8 @@ public class employe {
     protected int jabsences;
     protected int jcongé;
     protected int weekend;
-    protected  int sup=0;
-    protected  int inf=0;
-    public employe( String nom,String post,int salaire, int experience, int heuressup, int jabsences, int jcongé, int weekend) {
+    boolean empolyefort;
+    public employe( String nom,String post,int salaire, int experience, int heuressup, int jabsences, int jcongé, int weekend ,boolean employefort) {
         this.nom=nom;
         this.post=post;
         this.salaire=salaire;
@@ -18,24 +17,32 @@ public class employe {
         this.jabsences = jabsences;
         this.jcongé = jcongé;
         this.weekend = weekend;
+        this.empolyefort=employefort;
 
     }
     public int augmentations(){
+        int sup=0;
         int mony=200*heuressup;
-        sup=sup+mony;
+         sup=sup+mony;
         mony=experience*100;
         sup=sup+mony;
         mony=weekend*50;
+        if(empolyefort==true){
+            mony=mony+500;
+            sup=sup+mony;
+        }
+
         return sup;
     }
     public int sanctions(){
+        int inf=0;
         int mony=1000*jabsences;
         inf=inf+mony;
         return inf;
     }
     public int calcsalaire(){
-       sup=augmentations();
-       inf=sanctions();
+       int sup=augmentations();
+        int inf=sanctions();
         return salaire+sup-inf;
     }
 
